@@ -1,0 +1,48 @@
+Arguments: 
+  D:\programs\nodejs\node.exe C:\Users\HQY\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;D:\programs\nodejs\;D:\programs\Git\cmd;C:\Program Files\PuTTY\;D:\Tool\MongoDB\bin;C:\Ruby25-x64\bin;C:\Users\HQY\AppData\Local\Microsoft\WindowsApps;C:\Users\HQY\AppData\Roaming\npm;D:\programs\nodejs\node_global;D:\Tool\Microsoft VS Code\bin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  10.12.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\HQY\AppData\Local\Yarn\Cache\v4\npm-fast-deep-equal-2.0.1-7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49\node_modules\fast-deep-equal\index.d.ts' -> 'D:\myproject\test\dvaumi\dvaumi\node_modules\ajv-keywords\node_modules\fast-deep-equal\index.d.ts'
+
+npm manifest: 
+  {
+    "private": true,
+    "scripts": {
+      "start": "umi dev",
+      "build": "umi build",
+      "lint": "eslint --ext .js src test",
+      "precommit": "npm run lint"
+    },
+    "dependencies": {
+      "dva": "^2.4.1",
+      "umi": "^1.0.0",
+      "umi-plugin-dva": "^0.7.1"
+    },
+    "devDependencies": {
+      "eslint": "^4.14.0",
+      "eslint-config-umi": "^0.1.1",
+      "eslint-plugin-flowtype": "^2.34.1",
+      "eslint-plugin-import": "^2.6.0",
+      "eslint-plugin-jsx-a11y": "^5.1.1",
+      "eslint-plugin-react": "^7.1.0",
+      "husky": "^0.12.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
