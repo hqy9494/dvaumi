@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import fetch from 'dva/fetch';
 import axios from 'axios'
 import baseUrl from '../common/baseUrl';
@@ -15,19 +16,21 @@ import baseUrl from '../common/baseUrl';
 //   throw error;
 // }
 
-fetch = (playload) => {
+fetch = (payload) => {
   let obj = {
-    url: `${baseUrl.base}${playload.url}`,
-    type: playload.method,
+    url: `${baseUrl.base}${payload.url}`,
+    method: payload.method,
     headers:{
       Authorization: localStorage.getItem('token') || ""
-  },
+    },
   }
-  if(playload.data) obj.data = playload.data;
-  if(playload.params) {
-    let paramsList = Object.keys(playload.params).map(e=>`${e}=${playload.params[e]}`)
-      obj.url = `${obj.url}?${paramsList.join('&')}`
+  if(payload.data) obj.data = payload.data;
+  if(payload.params) {
+    let params = payload.params;
+    let paramsList = Object.keys(params).map(e=>`${e}=${payload.params[e]}`)
+    obj.url = `${obj.url}?${paramsList.join('&')}`
   }
+  console.log(obj,666)
   return axios(obj)
 }
 /**
@@ -37,10 +40,10 @@ fetch = (playload) => {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(playload) {
-  return fetch(playload)
+export default function request(payload) {
+  return fetch(payload)
     // .then(checkStatus)
     // .then(parseJSON)
     // .then(data => ({ data }))
-    // .catch(err => ({ err }));
+    .catch(err => alert(err.message));
 }

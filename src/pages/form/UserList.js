@@ -19,26 +19,24 @@ class User extends Component {
       console.log(e)
     })
   }
-  addTable = () => {
-    this.props.dispatch({type:'UserList/addTable'})
-  }
-  findTable = () => {
-    this.props.dispatch({type:'UserList/findTable'})
-  }
-  reflashTable = () => {
-    this.props.dispatch({type:'UserList/reflashTable'})
-  }
-  delTable = () => {
-    this.props.dispatch({type:'UserList/delTable'})
-  }
+  // addTable = () => {
+  //   this.props.dispatch({type:'UserList/addTable'})
+  // }
+  // findTable = () => {
+  //   this.props.dispatch({type:'UserList/findTable'})
+  // }
+ 
+  // delTable = () => {
+  //   this.props.dispatch({type:'UserList/delTable'})
+  // }
   
-  editTable = () => {
-    this.props.dispatch({type:'UserList/aditTable'})
-  }
+  // editTable = () => {
+  //   this.props.dispatch({type:'UserList/aditTable'})
+  // }
   
-  handle = () => {
+  // handle = () => {
 
-  }
+  // }
   
   handleModal = (name, value) => {
     this.props.dispatch({
@@ -55,8 +53,12 @@ class User extends Component {
       if(err){
         return 
       }
-      let data = {type:`UserList/${fun}`,playload:{user:values.user,pass:values.pass,tel:values.tel}}
-      if(id) data.playload.id = id;  
+      let payload = {};
+      Object.keys(values).map(e=>{
+        if(values[e]) payload[e] = values[e]
+      })
+      if(id) payload.id = id; 
+      let data = {type:`UserList/${fun}`,payload}
       this.props.dispatch(data)
     }
   )}
@@ -80,75 +82,59 @@ class User extends Component {
         key: 'tel',
       },
       {
+        title: '操作',
+        dataIndex: 'handle',
+        key: 'handle',
         render: (text,record) => {
           return <div>
-            <Button type="primary" size="small" onClick={()=>this.editTable(record.id)}>修改</Button>&nbsp;
-            <Button size="small"  onClick={()=>this.delTable(record.id)}>删除</Button>
+            <Button type="primary" size="small" onClick={()=>this.handleSubmit('editTable',record.id)}>修改</Button>&nbsp;
+            <Button size="small"  onClick={()=>this.handleSubmit('delTable',record.id)}>删除</Button>
           </div>
         }
       }
     ]
     console.log(this.props)
     return (
-    <Form gutter={24} style={{width:600}}>
-       <Form.Item gutter={18} label="user" {...formInput}>
-          {getFieldDecorator('user', {
-            label:'eeeeee',
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item gutter={18} label="pass" {...formInput}>
-          {getFieldDecorator('pass', {
-            label:'eeeeee',
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item gutter={18} label="tel" {...formInput}>
-          {getFieldDecorator('tel', {
-            label:'eeeeee',
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-            />,
-          )}
-        </Form.Item>
-      &nbsp;
-      <Form.Item style={{textAlign:'center'}}>
-        <Button id="add" type="primary" onClick={()=>this.handle('addTable')}>添加</Button>&nbsp;
-        <Button id="find" type="defalut" onClick={()=>this.findTable()}>查询</Button>&nbsp;
-        <Button id="reflash" type="danger" onClick={()=>this.props.dispatch({type:'UserList/getAllUser'})}>重置</Button>&nbsp;
-      </Form.Item>
-   
-      {/* <br/><br/><br/>
-      <table width="600" border="1">
-        <thead>
-          <tr>
-            <th>user</th>
-            <th>pass</th>
-            <th>tel</th>
-            <th>operate</th>
-          </tr>
-        </thead>
-        <tbody>
-            {
-              users.length && users.map((e,i)=>{
-                return <tr key={i}><td>{e.user}</td><td>{e.pass}</td><td>{e.tel}</td><td><Button onClick={()=>this.editTable(e.id)}>修改</Button><Button onClick={()=>this.delTable(e.id)}>删除</Button></td></tr>
-              })
-            }
-        </tbody>
-      </table> */}
+      <Form gutter={24} style={{width:600}}>
+        <Form.Item gutter={18} label="user" {...formInput}>
+            {getFieldDecorator('user', {
+              label:'eeeeee',
+              // rules: [{ required: true, message: 'Please input your user!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="User"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item gutter={18} label="pass" {...formInput}>
+            {getFieldDecorator('pass', {
+              label:'eeeeee',
+              // rules: [{ required: true, message: 'Please input your pass!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Pass"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item gutter={18} label="tel" {...formInput}>
+            {getFieldDecorator('tel', {
+              label:'eeeeee',
+              // rules: [{ required: true, message: 'Please input your tel!' }],
+            })(
+              <Input
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Tel"
+              />,
+            )}
+          </Form.Item>
+        &nbsp;
+          <Form.Item style={{textAlign:'center'}}>
+            <Button id="add" type="primary" onClick={()=>this.handleSubmit('addTable')}>添加</Button>&nbsp;
+            <Button id="find" type="defalut" onClick={()=>this.handleSubmit('findTable')}>查询</Button>&nbsp;
+            <Button id="reflash" type="danger" onClick={()=>this.props.dispatch({type:'UserList/getAllUser'})}>重置</Button>&nbsp;
+          </Form.Item>
         <Table dataSource={users} columns={colunm} rowKey="id"/>
       </Form>
     );

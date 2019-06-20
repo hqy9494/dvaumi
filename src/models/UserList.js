@@ -30,17 +30,67 @@ export default {
         return res
       },
       *addTable({payload}, {call, put, select}) {
-        // const res = yield call(addTable)
-        console.log(payload)
-        // if (!res) return
-        // yield put({
-        //   type: 'change',
-        //   payload: {
-        //     name: 'users',
-        //     value: res.data
-        //   }
-        // })
-        // return res
+        const res = yield call(addTable,{params:payload})
+        // console.log(payload,1)
+        if (!res) return
+        yield put({
+          type: 'change',
+          payload: {
+            name: 'users',
+            value: res.data
+          }
+        })
+        return res
+      },
+
+      *findTable({payload}, {call, put, select}) {
+        if(JSON.stringify(payload) === '{}'){
+          alert('查询条件不能全部为空！');
+          return
+        }
+        const res = yield call(findTable,{data:payload})
+        console.log(payload,1)
+        if (!res) return
+        yield put({
+          type: 'change',
+          payload: {
+            name: 'users',
+            value: res.data
+          }
+        })
+        return res
+      },
+      
+      *editTable({payload}, {call, put, select}) {
+        if(JSON.stringify(payload) === '{}'){
+          alert('查询条件不能全部为空！');
+          return
+        }
+        const res = yield call(editTable,{data:payload})
+        console.log(payload,1)
+        if (!res) return
+        yield put({
+          type: 'change',
+          payload: {
+            name: 'users',
+            value: res.data
+          }
+        })
+        return res
+      },
+
+      *delTable({payload}, {call, put, select}) {
+        const res = yield call(delTable,{params:{id:payload.id}})
+        console.log(payload,1)
+        if (!res) return
+        yield put({
+          type: 'change',
+          payload: {
+            name: 'users',
+            value: res.data
+          }
+        })
+        return res
       },
     },
   
