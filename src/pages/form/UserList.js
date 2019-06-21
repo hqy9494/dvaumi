@@ -15,28 +15,8 @@ class User extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({type:'UserList/getAllUser'}).then(e=>{
-      console.log(e)
-    })
+    this.props.dispatch({type:'UserList/getAllUser'})
   }
-  // addTable = () => {
-  //   this.props.dispatch({type:'UserList/addTable'})
-  // }
-  // findTable = () => {
-  //   this.props.dispatch({type:'UserList/findTable'})
-  // }
- 
-  // delTable = () => {
-  //   this.props.dispatch({type:'UserList/delTable'})
-  // }
-  
-  // editTable = () => {
-  //   this.props.dispatch({type:'UserList/aditTable'})
-  // }
-  
-  // handle = () => {
-
-  // }
   
   handleModal = (name, value) => {
     this.props.dispatch({
@@ -93,7 +73,7 @@ class User extends Component {
         }
       }
     ]
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <Form gutter={24} style={{width:600}}>
         <Form.Item gutter={18} label="user" {...formInput}>

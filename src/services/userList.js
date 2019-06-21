@@ -1,7 +1,7 @@
 import request from '../utils/request';
 
 export function getAllUser(payload) {
-    console.log(payload,0)
+    // console.log(payload,0)
 
     return request({
         url: '/form/sel',
@@ -18,7 +18,7 @@ export function addTable(payload) {
 }
 
 export function findTable(payload) {
-    // console.log(payload,2)
+    console.log(payload,2)
     return request({
         url: '/form/find',
         method:'post',
@@ -34,7 +34,7 @@ export function editTable(payload) {
     })
 }
 export function delTable(payload) {
-    console.log(payload,2)
+    // console.log(payload,2)
     return request({
         url: '/form/del',
         method:'get',

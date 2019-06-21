@@ -49,7 +49,7 @@ export default {
           return
         }
         const res = yield call(findTable,{data:payload})
-        console.log(payload,1)
+        // console.log(payload,1)
         if (!res) return
         yield put({
           type: 'change',
@@ -67,7 +67,7 @@ export default {
           return
         }
         const res = yield call(editTable,{data:payload})
-        console.log(payload,1)
+        // console.log(payload,1)
         if (!res) return
         yield put({
           type: 'change',
@@ -81,7 +81,7 @@ export default {
 
       *delTable({payload}, {call, put, select}) {
         const res = yield call(delTable,{params:{id:payload.id}})
-        console.log(payload,1)
+        // console.log(payload,1)
         if (!res) return
         yield put({
           type: 'change',

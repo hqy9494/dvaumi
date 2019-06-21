@@ -30,7 +30,7 @@ fetch = (payload) => {
     let paramsList = Object.keys(params).map(e=>`${e}=${payload.params[e]}`)
     obj.url = `${obj.url}?${paramsList.join('&')}`
   }
-  console.log(obj,666)
+  // console.log(obj,666)
   return axios(obj)
 }
 /**
