@@ -1,4 +1,10 @@
-
+// export default () => {
+//     return (
+//       <div>
+//         Users Page
+//       </div>
+//     )
+//   }
 
 
 import React from 'react';
@@ -12,37 +18,33 @@ const formInput = {
   labelCol: {span:4},
   wrapperCol: {span:20},
 }
-class Login extends Component {
+class User extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      status: 'Login'
-    };
+    this.state = {};
   }
   
-  handleSubmit = (fn) => {
+  postLogin = () => {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if(err){
         return 
       }
+      // let payload = {};
+      // Object.keys(values).map(e=>{
+      //   if(values[e]) payload[e] = values[e]
+      // })
+      // if(id) payload.id = id; 
+      // let data = {type:`UserList/${fun}`,payload}
+      // this.props.dispatch(data)
       this.props.dispatch({
-        type: `Index/post${fn}`,
+        type: 'UserPage/postLogin',
         payload: {...values}
-      }).then(v=>{
-        if(v.data.success){
-          this.props.history.push('/form/UserList')
-        }else{
-          alert(v.data.message)
-        }
-        // console.log(this.props.history.push('/form/UserList'))
       })
     })
   }
   render(){
     const { getFieldDecorator } = this.props.form;
-    const { status } = this.state
-    // const status = this.props.match
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         {/* <h1 className={styles.title}>Yay! Welcome to dva!</h1>
@@ -52,11 +54,12 @@ class Login extends Component {
           <li><a href="https://github.com/dvajs/dva">Getting Started</a></li>
         </ul> */}
         <Row gutter={24}>
-          <Col sm={12} offset={6}>
+          <Col sm={8} offset={8}>
             <Card>
               <Form>
                 <FormItem {...formInput} label={"用户"}>
                 {getFieldDecorator('user', {
+                  label:'eeeeee',
                   rules: [{ required: true, message: 'Please input your user!' }],
                 })(
                   <Input
@@ -67,6 +70,7 @@ class Login extends Component {
                 </FormItem>
                 <FormItem {...formInput} label={"密码"}>
                 {getFieldDecorator('pass', {
+                  label:'eeeeee',
                   rules: [{ required: true, message: 'Please input your pass!' }],
                 })(
                   <Input
@@ -75,20 +79,12 @@ class Login extends Component {
                   />,
                 )}
                 </FormItem>
-                {status === 'Signup' && <FormItem {...formInput} label={"手机"}>
-                {getFieldDecorator('tel', {
-                  rules: [{ required: true, message: 'Please input your pass!' }],
-                })(
-                  <Input
-                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Tel"
-                  />,
-                )}
-                </FormItem>}
                 &nbsp;
                 <Form.Item style={{textAlign:'center'}}>
-                  <Button  type="primary" onClick={()=>this.handleSubmit(status)}>{status === 'Login'?'登录':'注册'}</Button>
-                  <Button  type="defalut" onClick={()=>this.setState({status:status === 'Login'?'Signup':'Login'})}>{status === 'Login'?'切换注册':'切换登录'}</Button>
+                  <Button  type="primary" onClick={()=>this.postLogin()}>登录</Button>
+                  {/* <Button id="add" type="primary" onClick={()=>this.handleSubmit('addTable')}>添加</Button>&nbsp;
+                  <Button id="find" type="defalut" onClick={()=>this.handleSubmit('findTable')}>查询</Button>&nbsp;
+                  <Button id="reflash" type="danger" onClick={()=>this.props.dispatch({type:'UserList/getAllUser'})}>重置</Button>&nbsp; */}
                 </Form.Item>
               </Form>
             </Card>
@@ -101,13 +97,13 @@ class Login extends Component {
   }
   
 }
-const Index = Form.create()(Login);
+const UserPage = Form.create()(User);
 const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.Index.user || null
+    users: state.UserPage.user || null
   }
 }
-Index.propTypes = {};
+UserPage.propTypes = {};
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(UserPage);
 
